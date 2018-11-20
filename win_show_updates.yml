@@ -11,3 +11,8 @@
         - SecurityUpdates
         - CriticalUpdates
         - UpdateRollups
+    register: update_results
+
+  - name: リストの表示
+    debug:
+      msg: "{{ update_results.updates }}"

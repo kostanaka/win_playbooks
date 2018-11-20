@@ -1,0 +1,8 @@
+---
+- name: Windows Server群への ansible ping
+  hosts: all
+
+  tasks:
+
+  - name: win_ping の実行
+    win_ping:

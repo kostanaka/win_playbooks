@@ -17,7 +17,7 @@
         - CriticalUpdates
         - UpdateRollups
       reboot: no
-    register update_result
+    register: update_result
 
   - name: rebootする場合はログインユーザーへ警告表示(30秒)
     win_msg:
