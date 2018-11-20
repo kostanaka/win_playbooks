@@ -28,7 +28,7 @@
 
   - name: リブートの実施
     win_reboot:
-      reboot_timeout: 300
+      reboot_timeout: 3600
     when: update_result.reboot_required
 
   - name: リブート不要メッセージの出力
