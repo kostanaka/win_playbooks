@@ -1,0 +1,37 @@
+---
+- name: Windows Updatesの実施
+  hosts: all
+
+  tasks:
+
+  - name: ログインユーザーへのメッセージ表示
+    win_msg:
+      display_seconds: 60
+      msg: "バックグラウンドでWindows Updateを実行します"
+      wait: no
+
+  - name: Windows Updatesによるアップデートの実行
+    win_updates:
+      category_names: 
+        - SecurityUpdates
+        - CriticalUpdates
+        - UpdateRollups
+      reboot: no
+    register update_result
+
+  - name: rebootする場合はログインユーザーへ警告表示(30秒)
+    win_msg:
+      display_seconds: 30
+      msg: "リブートの必要なアップデートが適用されました。30秒後にはリブートします"
+      wait: no
+    when: update_result.reboot_required
+
+  - name: リブートの実施
+    win_reboot:
+      reboot_timeout: 300
+    when: update_result.reboot_required
+
+  - name: リブート不要メッセージの出力
+    debug:
+      msg: リブートは不要でした
+    when: not update_result.reboot_required 

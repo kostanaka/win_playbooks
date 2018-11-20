@@ -1,0 +1,13 @@
+---
+- name: Windows Updatesによりアップデートすべき内容の一覧取得
+  hosts: all
+
+  tasks:
+
+  - name: Windows Updatesによるアップデート検索結果の取得
+    win_updates:
+      state: searched
+      category_names: 
+        - SecurityUpdates
+        - CriticalUpdates
+        - UpdateRollups
