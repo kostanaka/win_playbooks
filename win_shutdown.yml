@@ -1,0 +1,10 @@
+---
+- name: Windowsマシンのシャットダウン
+  hosts: all
+  vars:
+  - grace_period: 30
+
+  tasks:
+
+  - name: シャットダウン指示
+    win_command: "shutdown /s /t {{ grace_period }}"
