@@ -6,5 +6,11 @@
 
   tasks:
 
+  - name: シャットダウン予告メッセージ
+    win_msg:
+      msg: "システムを停止します。OKを押すとシャットダウン処理が開始されます(最大で{{ grace_period }}秒待ちます)"
+      wait: yes
+      display_seconds: "{{ grace_period }}"
+
   - name: シャットダウン指示
-    win_command: "shutdown /s /t {{ grace_period }}"
+    win_command: "shutdown /s"
