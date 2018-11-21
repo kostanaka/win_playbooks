@@ -26,12 +26,12 @@
       display_seconds: 30
       msg: "リブートの必要なアップデートが適用されました。30秒後にはリブートします"
       wait: no
-    when: update_result.reboot_required and {{ reboot_after_updates }}
+    when: update_result.reboot_required and "{{ reboot_after_updates }}" == 'yes'
 
   - name: リブートの実施
     win_reboot:
       reboot_timeout: 3600
-    when: update_result.reboot_required and {{ reboot_after_updates }}
+    when: update_result.reboot_required and "{{ reboot_after_updates }}" == 'yes'
 
   - name: リブート不要メッセージの出力
     debug:
