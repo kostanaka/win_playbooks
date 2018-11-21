@@ -9,7 +9,7 @@
   - name: ログインユーザーへのメッセージ表示
     win_msg:
       display_seconds: 60
-      msg: "バックグラウンドでWindows Updateを実行します"
+      msg: "バックグラウンドでWindows Updateを実行中です"
       wait: no
 
   - name: Windows Updatesによるアップデートの実行
@@ -26,12 +26,12 @@
       display_seconds: 30
       msg: "リブートの必要なアップデートが適用されました。30秒後にはリブートします"
       wait: no
-    when: update_result.reboot_required and "{{ reboot_after_updates }}" == 'yes'
+    when: update_result.reboot_required and reboot_after_updates
 
   - name: リブートの実施
     win_reboot:
       reboot_timeout: 3600
-    when: update_result.reboot_required and "{{ reboot_after_updates }}" == 'yes'
+    when: update_result.reboot_required and reboot_after_updates
 
   - name: リブート不要メッセージの出力
     debug:
