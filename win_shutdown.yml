@@ -8,7 +8,7 @@
 
   - name: シャットダウン予告メッセージ
     win_msg:
-      msg: "システムを停止します。OKを押すとシャットダウン処理が開始されます(最大で{{ grace_period }}秒待ちます)"
+      msg: "システムを停止します。OKを押すと直ちにシャットダウン処理へ移行します(最大で{{ grace_period }}秒待ちます)"
       wait: yes
       display_seconds: "{{ grace_period }}"
 
