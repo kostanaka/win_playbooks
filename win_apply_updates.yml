@@ -1,6 +1,8 @@
 ---
 - name: Windows Updatesの実施
   hosts: all
+  vars:
+  - reboot_after_updates: no
 
   tasks:
 
@@ -24,12 +26,12 @@
       display_seconds: 30
       msg: "リブートの必要なアップデートが適用されました。30秒後にはリブートします"
       wait: no
-    when: update_result.reboot_required
+    when: update_result.reboot_required and {{ reboot_after_updates }}
 
   - name: リブートの実施
     win_reboot:
       reboot_timeout: 3600
-    when: update_result.reboot_required
+    when: update_result.reboot_required and {{ reboot_after_updates }}
 
   - name: リブート不要メッセージの出力
     debug:
