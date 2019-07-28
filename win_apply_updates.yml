@@ -23,7 +23,6 @@
 
   - name: rebootする場合はログインユーザーへ警告表示(30秒)
     win_msg:
-      wait: yes
       display_seconds: 30
       msg: "リブートの必要なアップデートが適用されました。30秒後にはリブートします"
       wait: no
